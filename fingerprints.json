@@ -1137,6 +1137,289 @@
       "confidence": "high"
     },
     {
+      "name": "classnames",
+      "import": "import classNames from 'classnames'",
+      "patterns": ["classNames"],
+      "anyOf": ["hasOwnProperty", "\\[native code\\]"],
+      "noneOf": ["conflictingClassGroups", "defaultVariants", "cmdk-", "data-", "--radix-", "useState|getState|setState"],
+      "confidence": "medium"
+    },
+    {
+      "name": "react-transition-group",
+      "import": "import { CSSTransition, TransitionGroup } from 'react-transition-group'",
+      "patterns": ["onExited", "onEntered"],
+      "anyOf": ["CSSTransition|TransitionGroup|SwitchTransition|ReplaceTransition"],
+      "noneOf": ["--radix-|data-radix-|framerAppearId|presenceContext"],
+      "confidence": "high"
+    },
+    {
+      "name": "lottie-web",
+      "import": "import lottie from 'lottie-web'",
+      "patterns": ["data-bm-type|data-bm-renderer|data-bm-loop"],
+      "anyOf": ["data-animation-path|data-bm-path|data-bm-autoplay"],
+      "confidence": "high"
+    },
+    {
+      "name": "lottie-react",
+      "import": "import Lottie from 'lottie-react'",
+      "patterns": ["data-bm-type|data-bm-renderer"],
+      "anyOf": ["lottie-react|useLottie"],
+      "confidence": "high"
+    },
+    {
+      "name": "@popperjs/core",
+      "import": "import { createPopper } from '@popperjs/core'",
+      "patterns": ["data-popper-placement|data-popper-reference-hidden|data-popper-escaped"],
+      "anyOf": ["createPopper|createPopperBase"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-popper",
+      "import": "import { usePopper } from 'react-popper'",
+      "patterns": ["data-popper-placement"],
+      "anyOf": ["usePopper|Manager|Popper|Reference"],
+      "noneOf": ["--radix-popover|--radix-tooltip|--radix-dropdown"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-remove-scroll",
+      "import": "import { RemoveScroll } from 'react-remove-scroll'",
+      "patterns": ["--removed-body-scroll-bar-size|data-scroll-locked"],
+      "confidence": "high"
+    },
+    {
+      "name": "aria-hidden",
+      "import": "import { hideOthers } from 'aria-hidden'",
+      "patterns": ["data-aria-hidden|data-inert-ed|data-suppressed"],
+      "anyOf": ["hideOthers|inertOthers|suppressOthers|supportsInert"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-focus-lock",
+      "import": "import FocusLock from 'react-focus-lock'",
+      "patterns": ["data-focus-lock|data-focus-guard|data-no-focus-lock"],
+      "anyOf": ["data-focus-auto-guard|data-autofocus-inside|data-no-autofocus|data-focus-lock-disabled"],
+      "confidence": "high"
+    },
+    {
+      "name": "downshift",
+      "import": "import { useCombobox, useSelect } from 'downshift'",
+      "patterns": ["highlightedIndex", "isOpen"],
+      "anyOf": ["useCombobox|useSelect|useMultipleSelection|useTagGroup|resetIdCounter"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-number-format",
+      "import": "import { NumericFormat, PatternFormat } from 'react-number-format'",
+      "patterns": ["formattedValue", "numAsString"],
+      "anyOf": ["NumericFormat|PatternFormat|NumberFormatBase|valueIsNumericString"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-datepicker",
+      "import": "import DatePicker from 'react-datepicker'",
+      "patterns": ["react-datepicker"],
+      "anyOf": ["react-datepicker-popper|react-datepicker-wrapper|react-datepicker--time-only"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-dnd",
+      "import": "import { useDrag, useDrop, DndProvider } from 'react-dnd'",
+      "patterns": ["DndProvider|DndContext"],
+      "anyOf": ["useDragDropManager|DragPreviewImage|useDragLayer|getSourceClientOffset"],
+      "noneOf": ["DndContext.*useDraggable|@dnd-kit"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-dnd-html5-backend",
+      "import": "import { HTML5Backend } from 'react-dnd-html5-backend'",
+      "patterns": ["Cannot have two HTML5 backends at the same time"],
+      "anyOf": ["HTML5Backend|NativeTypes|getEmptyImage"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-modal",
+      "import": "import Modal from 'react-modal'",
+      "patterns": ["data-react-modal-body-trap|react-modal"],
+      "anyOf": ["portalOpenInstances|beforeClose|afterOpen"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-tooltip",
+      "import": "import { Tooltip } from 'react-tooltip'",
+      "patterns": ["data-tooltip-place|data-tooltip-content|react-tooltip"],
+      "anyOf": ["data-tooltip-variant|data-tooltip-id|react-tooltip-core-styles|--rt-arrow-size"],
+      "noneOf": ["--radix-tooltip|data-sonner"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-colorful",
+      "import": "import { HexColorPicker } from 'react-colorful'",
+      "patterns": ["react-colorful"],
+      "anyOf": ["toHsva|fromHsva|defaultColor|HexColorPicker|HslColorPicker"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-slick",
+      "import": "import Slider from 'react-slick'",
+      "patterns": ["currentSlide", "slideCount"],
+      "anyOf": ["slick-slide|slick-active|slick-current|lazyLoadedList|slidesToShow"],
+      "confidence": "high"
+    },
+    {
+      "name": "@sentry/react",
+      "import": "import * as Sentry from '@sentry/react'",
+      "patterns": ["data-sentry-feedback|sentry-"],
+      "anyOf": ["captureReactException|reactErrorHandler|SentryBufferFullError|SentryInternalError"],
+      "confidence": "high"
+    },
+    {
+      "name": "posthog-js",
+      "import": "import posthog from 'posthog-js'",
+      "patterns": ["data-ph-capture-attribute"],
+      "anyOf": ["distinct_id|device_id|PostHog|posthog"],
+      "confidence": "high"
+    },
+    {
+      "name": "@vercel/analytics",
+      "import": "import { Analytics } from '@vercel/analytics/react'",
+      "patterns": ["vercel|vitals"],
+      "anyOf": ["va-event|analyticsId|sendBeacon"],
+      "noneOf": ["posthog|sentry|data-ph"],
+      "confidence": "medium"
+    },
+    {
+      "name": "@stripe/stripe-js",
+      "import": "import { loadStripe } from '@stripe/stripe-js'",
+      "patterns": ["loadStripe|Stripe\\.js"],
+      "anyOf": ["publishable key|Expected document\\.body"],
+      "confidence": "high"
+    },
+    {
+      "name": "@stripe/react-stripe-js",
+      "import": "import { Elements, CardElement } from '@stripe/react-stripe-js'",
+      "patterns": ["react-stripe-js|ElementsContext"],
+      "anyOf": ["CardElement|PaymentElement|EmbeddedCheckout|CheckoutContext|EmbeddedCheckoutProvider"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-bootstrap",
+      "import": "import { Button, Modal } from 'react-bootstrap'",
+      "patterns": ["bsPrefix"],
+      "anyOf": ["ReactBootstrap|data-bs-target|data-bs-popper|data-bs-theme"],
+      "noneOf": ["--radix-|data-radix-"],
+      "confidence": "high"
+    },
+    {
+      "name": "nanoid",
+      "import": "import { nanoid } from 'nanoid'",
+      "patterns": ["urlAlphabet|customAlphabet"],
+      "anyOf": ["nanoid|customRandom"],
+      "noneOf": ["uuid|v4|v7"],
+      "confidence": "high"
+    },
+    {
+      "name": "uuid",
+      "import": "import { v4 as uuidv4 } from 'uuid'",
+      "patterns": ["Stringified UUID is invalid|Invalid UUID"],
+      "anyOf": ["v1ToV6|v6ToV1"],
+      "confidence": "high"
+    },
+    {
+      "name": "prop-types",
+      "import": "// prop-types — do not import directly in modern React",
+      "patterns": ["PropTypes|propTypes"],
+      "anyOf": ["checkPropTypes|isRequired|oneOfType|arrayOf|objectOf"],
+      "noneOf": ["__SECRET_INTERNALS|__CLIENT_INTERNALS"],
+      "confidence": "medium"
+    },
+    {
+      "name": "react-is",
+      "import": "// react-is — internal, do not import directly",
+      "patterns": ["isContextConsumer|isContextProvider|isForwardRef|isMemo|isLazy"],
+      "confidence": "high"
+    },
+    {
+      "name": "@tanstack/react-form",
+      "import": "import { useForm } from '@tanstack/react-form'",
+      "patterns": ["errorMap", "fieldApi|formApi"],
+      "anyOf": ["tanstack-|createFormHook|isTouched|isValidating|errorSourceMap"],
+      "noneOf": ["useFormik|Formik|handleSubmit.*formState"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-color",
+      "import": "import { SketchPicker } from 'react-color'",
+      "patterns": ["SketchPicker|ChromePicker|TwitterPicker|CompactPicker|CirclePicker"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-wrap-balancer",
+      "import": "import { Balancer } from 'react-wrap-balancer'",
+      "patterns": ["data-br|data-brr"],
+      "anyOf": ["preferNative"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-medium-image-zoom",
+      "import": "import Zoom from 'react-medium-image-zoom'",
+      "patterns": ["data-rmiz"],
+      "anyOf": ["data-rmiz-modal|data-rmiz-btn-zoom|data-rmiz-btn-unzoom|data-rmiz-portal"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-toolbar",
+      "import": "import { Toolbar, ToolbarButton, ToolbarLink } from '@radix-ui/react-toolbar'",
+      "patterns": ["__scopeToolbar"],
+      "anyOf": ["ToolbarButton|ToolbarLink|ToolbarToggleItem"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-image-gallery",
+      "import": "import ImageGallery from 'react-image-gallery'",
+      "patterns": ["image-gallery"],
+      "anyOf": ["isFullscreen|slideDuration|onSwiping|onSwiped"],
+      "noneOf": ["swiper-slide|embla"],
+      "confidence": "high"
+    },
+    {
+      "name": "@clerk/clerk-react",
+      "import": "import { ClerkProvider, useUser } from '@clerk/clerk-react'",
+      "patterns": ["@clerk/clerk-react|data-clerk-component|ClerkProvider"],
+      "anyOf": ["ClerkApiError|ClerkRuntimeError|ClerkAPIResponseError|ClerkInstanceContext"],
+      "confidence": "high"
+    },
+    {
+      "name": "embla-carousel-autoplay",
+      "import": "import Autoplay from 'embla-carousel-autoplay'",
+      "patterns": ["autoplay"],
+      "anyOf": ["slideFocusStart|slidesChanged"],
+      "noneOf": ["swiper-|react-slick|slick-"],
+      "confidence": "medium"
+    },
+    {
+      "name": "react-scroll",
+      "import": "import { Link, animateScroll } from 'react-scroll'",
+      "patterns": ["animateScroll|scrollSpy"],
+      "anyOf": ["ScrollElement|ScrollLink|Helpers\\.Scroll|Helpers\\.Element"],
+      "noneOf": ["lenis|data-lenis"],
+      "confidence": "high"
+    },
+    {
+      "name": "framer-motion-3d",
+      "import": "import { MotionCanvas } from 'framer-motion-3d'",
+      "patterns": ["MotionCanvas|LayoutCamera|LayoutOrthographicCamera"],
+      "anyOf": ["@react-three/fiber|data-framer-portal-id"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-countup",
+      "import": "import CountUp from 'react-countup'",
+      "patterns": ["useCountUp|pauseResume"],
+      "anyOf": ["useEasing|useGrouping|useIndianSeparators"],
+      "confidence": "high"
+    },
+    {
       "name": "scheduler",
       "import": "// internal scheduler — do not import directly",
       "patterns": ["unstable_scheduleCallback|unstable_NormalPriority"],
