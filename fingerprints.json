@@ -67,6 +67,38 @@
       "confidence": "high"
     },
     {
+      "name": "zustand/vanilla",
+      "import": "import { createStore } from 'zustand/vanilla'",
+      "patterns": ["getState", "setState", "subscribe"],
+      "anyOf": ["getInitialState", "destroy"],
+      "noneOf": ["useSyncExternalStore|useRef|useState|useEffect|useCallback"],
+      "confidence": "high"
+    },
+    {
+      "name": "zustand/traditional",
+      "import": "import { useStoreWithEqualityFn } from 'zustand/traditional'",
+      "patterns": ["useSyncExternalStore", "equalityFn"],
+      "anyOf": ["\\.getState", "\\.subscribe"],
+      "noneOf": ["fireImmediately|subscribeWithSelector"],
+      "confidence": "high"
+    },
+    {
+      "name": "zustand/middleware/immer",
+      "import": "import { immer } from 'zustand/middleware/immer'",
+      "patterns": ["produce|isDraftable|DRAFT_STATE"],
+      "anyOf": ["getState", "setState"],
+      "noneOf": ["enableMapSet|enablePatches"],
+      "confidence": "high"
+    },
+    {
+      "name": "zustand/middleware",
+      "import": "import { combine } from 'zustand/middleware'",
+      "patterns": ["getState", "setState"],
+      "anyOf": ["Object\\.assign"],
+      "noneOf": ["__REDUX_DEVTOOLS_EXTENSION__|equalityFn|fireImmediately|rehydrate|hasHydrated"],
+      "confidence": "medium"
+    },
+    {
       "name": "jotai",
       "import": "import { atom, useAtom } from 'jotai'",
       "patterns": ["atom not writable|no atom init|multiple Jotai instances|pmndrs\\/jotai"],
@@ -751,6 +783,375 @@
       "import": "import TextareaAutosize from 'react-textarea-autosize'",
       "patterns": ["TextareaAutosize|autosize"],
       "anyOf": ["onHeightChange|cacheMeasurements"],
+      "confidence": "high"
+    },
+    {
+      "name": "motion",
+      "import": "import { motion, AnimatePresence } from 'motion/react'",
+      "patterns": ["motionComponentSymbol"],
+      "anyOf": ["presenceContext", "latestValues", "visualState", "variantChildren"],
+      "confidence": "high"
+    },
+    {
+      "name": "motion",
+      "import": "import { motion, AnimatePresence } from 'motion/react'",
+      "patterns": ["data-motion-pop-id"],
+      "anyOf": ["motionComponentSymbol"],
+      "confidence": "high"
+    },
+    {
+      "name": "@tanstack/react-router",
+      "import": "import { createRouter, createRoute } from '@tanstack/react-router'",
+      "patterns": ["routeTree|createRouter|createRootRoute"],
+      "anyOf": ["useRouter|useMatch|useNavigate|useSearch|routeContext"],
+      "noneOf": ["BrowserRouter|createBrowserRouter"],
+      "confidence": "high"
+    },
+    {
+      "name": "@hookform/resolvers",
+      "import": "import { zodResolver } from '@hookform/resolvers/zod'",
+      "patterns": ["zodResolver|yupResolver|superstructResolver|valibotResolver|joiResolver"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-toast",
+      "import": "import { Toast, ToastProvider, ToastViewport } from '@radix-ui/react-toast'",
+      "patterns": ["--radix-toast-swipe-move-x|--radix-toast-swipe-move-y|--radix-toast-swipe-end-x"],
+      "anyOf": ["ToastProvider", "ToastViewport", "data-radix-collection-item"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-markdown",
+      "import": "import ReactMarkdown from 'react-markdown'",
+      "patterns": ["react-markdown|remarkPlugins|rehypePlugins"],
+      "anyOf": ["allowedElements|disallowedElements|unwrapDisallowed"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-syntax-highlighter",
+      "import": "import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'",
+      "patterns": ["SyntaxHighlighter|react-syntax-highlighter"],
+      "anyOf": ["showLineNumbers|wrapLines|wrapLongLines|codeTagProps"],
+      "confidence": "high"
+    },
+    {
+      "name": "prismjs",
+      "import": "import Prism from 'prismjs'",
+      "patterns": ["Prism\\.languages|Prism\\.highlight|Prism\\.tokenize"],
+      "confidence": "high"
+    },
+    {
+      "name": "highlight.js",
+      "import": "import hljs from 'highlight.js'",
+      "patterns": ["hljs\\.highlight|hljs\\.registerLanguage|hljs\\.highlightAuto"],
+      "confidence": "high"
+    },
+    {
+      "name": "@mui/material",
+      "import": "import { Button, TextField } from '@mui/material'",
+      "patterns": ["MuiButtonBase|MuiTypography|Mui-disabled|Mui-focusVisible"],
+      "anyOf": ["muiName", "MuiPaper", "MuiBox"],
+      "confidence": "high"
+    },
+    {
+      "name": "@mui/system",
+      "import": "import { styled, ThemeProvider } from '@mui/system'",
+      "patterns": ["muiName|MuiThemeProvider|MuiStyledEngine"],
+      "noneOf": ["MuiButtonBase|MuiTypography"],
+      "confidence": "high"
+    },
+    {
+      "name": "@chakra-ui/react",
+      "import": "import { ChakraProvider, Box, Button } from '@chakra-ui/react'",
+      "patterns": ["chakra-ui|ChakraProvider"],
+      "anyOf": ["useColorMode|useToast|useDisclosure|chakra-"],
+      "confidence": "high"
+    },
+    {
+      "name": "antd",
+      "import": "import { Button, Input, Form } from 'antd'",
+      "patterns": ["ant-btn|ant-input|ant-form|ant-table|ant-modal"],
+      "anyOf": ["anticon", "ant-"],
+      "confidence": "high"
+    },
+    {
+      "name": "@mantine/core",
+      "import": "import { MantineProvider, Button } from '@mantine/core'",
+      "patterns": ["mantine-|MantineProvider"],
+      "anyOf": ["--mantine-color-|--mantine-spacing-|--mantine-radius-"],
+      "confidence": "high"
+    },
+    {
+      "name": "@nextui-org/react",
+      "import": "import { NextUIProvider, Button } from '@nextui-org/react'",
+      "patterns": ["nextui|NextUIProvider"],
+      "anyOf": ["data-nextui|--nextui-"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-error-boundary",
+      "import": "import { ErrorBoundary } from 'react-error-boundary'",
+      "patterns": ["ErrorBoundary"],
+      "anyOf": ["FallbackComponent|fallbackRender|onError|onReset|resetKeys"],
+      "noneOf": ["RedirectBoundary|InnerLayoutRouter"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-helmet-async",
+      "import": "import { Helmet } from 'react-helmet-async'",
+      "patterns": ["HelmetProvider|helmetInstances"],
+      "anyOf": ["encodeSpecialCharacters|titleTemplate"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-i18next",
+      "import": "import { useTranslation } from 'react-i18next'",
+      "patterns": ["I18nextProvider|useTranslation|withTranslation"],
+      "anyOf": ["i18next|Trans|t\\("],
+      "confidence": "high"
+    },
+    {
+      "name": "i18next",
+      "import": "import i18n from 'i18next'",
+      "patterns": ["i18next"],
+      "anyOf": ["changeLanguage|addResourceBundle|hasResourceBundle|getFixedT|cloneInstance"],
+      "noneOf": ["useTranslation|I18nextProvider"],
+      "confidence": "high"
+    },
+    {
+      "name": "next-intl",
+      "import": "import { useTranslations } from 'next-intl'",
+      "patterns": ["next-intl|NextIntlClientProvider"],
+      "anyOf": ["useTranslations|useMessages|useLocale|useFormatter"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-dropzone",
+      "import": "import { useDropzone } from 'react-dropzone'",
+      "patterns": ["useDropzone|getRootProps|getInputProps"],
+      "anyOf": ["acceptedFiles|fileRejections|isDragActive|isDragAccept|isDragReject"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-loading-skeleton",
+      "import": "import Skeleton from 'react-loading-skeleton'",
+      "patterns": ["react-loading-skeleton"],
+      "anyOf": ["SkeletonTheme|baseColor|highlightColor|enableAnimation"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-spinners",
+      "import": "import { ClipLoader } from 'react-spinners'",
+      "patterns": ["react-spinners"],
+      "anyOf": ["BeatLoader|ClipLoader|PulseLoader|RingLoader|ScaleLoader|SyncLoader|BounceLoader|CircleLoader"],
+      "confidence": "high"
+    },
+    {
+      "name": "@use-gesture/react",
+      "import": "import { useDrag, useGesture } from '@use-gesture/react'",
+      "patterns": ["useDrag|useGesture|usePinch|useWheel|useScroll"],
+      "anyOf": ["gestureState|intentional|swipe|velocity|direction|movement|offset"],
+      "noneOf": ["DndContext|useDraggable"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-hotkeys-hook",
+      "import": "import { useHotkeys } from 'react-hotkeys-hook'",
+      "patterns": ["useHotkeys"],
+      "anyOf": ["enableOnFormTags|enableOnContentEditable|preventDefault|enabled"],
+      "noneOf": ["DndContext|useDraggable"],
+      "confidence": "high"
+    },
+    {
+      "name": "axios",
+      "import": "import axios from 'axios'",
+      "patterns": ["axios"],
+      "anyOf": ["interceptors|AxiosError|isAxiosError|CancelToken|CanceledError"],
+      "confidence": "high"
+    },
+    {
+      "name": "@supabase/supabase-js",
+      "import": "import { createClient } from '@supabase/supabase-js'",
+      "patterns": ["supabase"],
+      "anyOf": ["createClient|supabaseUrl|supabaseKey|GoTrueClient|RealtimeClient"],
+      "noneOf": ["firebase"],
+      "confidence": "high"
+    },
+    {
+      "name": "firebase",
+      "import": "import { initializeApp } from 'firebase/app'",
+      "patterns": ["firebase|FirebaseApp"],
+      "anyOf": ["initializeApp|getFirestore|getAuth|getStorage|FirebaseError"],
+      "noneOf": ["supabase"],
+      "confidence": "high"
+    },
+    {
+      "name": "@trpc/react-query",
+      "import": "import { createTRPCReact } from '@trpc/react-query'",
+      "patterns": ["trpc|createTRPCReact|TRPCClientError"],
+      "anyOf": ["useQuery|useMutation|useUtils|getQueryKey"],
+      "confidence": "high"
+    },
+    {
+      "name": "@trpc/client",
+      "import": "import { createTRPCClient } from '@trpc/client'",
+      "patterns": ["TRPCClientError|createTRPCClient"],
+      "anyOf": ["httpBatchLink|httpLink|wsLink|splitLink"],
+      "noneOf": ["createTRPCReact"],
+      "confidence": "high"
+    },
+    {
+      "name": "urql",
+      "import": "import { useQuery, useMutation } from 'urql'",
+      "patterns": ["urql|UrqlProvider|Client"],
+      "anyOf": ["cacheExchange|fetchExchange|dedupExchange"],
+      "noneOf": ["ApolloClient"],
+      "confidence": "high"
+    },
+    {
+      "name": "graphql",
+      "import": "import { graphql } from 'graphql'",
+      "patterns": ["GraphQLError|GraphQLSchema|GraphQLObjectType"],
+      "anyOf": ["buildSchema|execute|parse|validate"],
+      "confidence": "high"
+    },
+    {
+      "name": "socket.io-client",
+      "import": "import { io } from 'socket.io-client'",
+      "patterns": ["socket\\.io"],
+      "anyOf": ["onAny|emitReserved|ENGINE_IO_PING|Engine\\.IO"],
+      "confidence": "high"
+    },
+    {
+      "name": "chart.js",
+      "import": "import { Chart } from 'chart.js'",
+      "patterns": ["Chart\\.register|Chart\\.defaults"],
+      "anyOf": ["CategoryScale|LinearScale|BarController|LineController|PieController|DoughnutController"],
+      "noneOf": ["recharts-"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-chartjs-2",
+      "import": "import { Line, Bar, Pie } from 'react-chartjs-2'",
+      "patterns": ["react-chartjs-2"],
+      "anyOf": ["Chart\\.register"],
+      "noneOf": ["recharts-"],
+      "confidence": "high"
+    },
+    {
+      "name": "d3",
+      "import": "import * as d3 from 'd3'",
+      "patterns": ["d3\\.select|d3\\.scaleLinear|d3\\.axisBottom|d3\\.line"],
+      "anyOf": ["d3\\.transition|d3\\.interpolate|d3\\.format"],
+      "confidence": "high"
+    },
+    {
+      "name": "@nivo/core",
+      "import": "import { ResponsiveLine } from '@nivo/line'",
+      "patterns": ["nivo"],
+      "anyOf": ["@nivo|nivoTheme|ResponsiveLine|ResponsiveBar|ResponsivePie"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-map-gl",
+      "import": "import Map from 'react-map-gl'",
+      "patterns": ["react-map-gl|mapboxgl|maplibregl"],
+      "anyOf": ["MapProvider|useMap|NavigationControl|Marker|Popup"],
+      "confidence": "high"
+    },
+    {
+      "name": "leaflet",
+      "import": "import L from 'leaflet'",
+      "patterns": ["leaflet"],
+      "anyOf": ["L\\.map|L\\.tileLayer|L\\.marker|L\\.popup|L\\.icon"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-leaflet",
+      "import": "import { MapContainer, TileLayer, Marker } from 'react-leaflet'",
+      "patterns": ["react-leaflet|MapContainer"],
+      "anyOf": ["TileLayer|useMap|useMapEvents"],
+      "confidence": "high"
+    },
+    {
+      "name": "@clerk/nextjs",
+      "import": "import { ClerkProvider, SignIn } from '@clerk/nextjs'",
+      "patterns": ["clerk|ClerkProvider"],
+      "anyOf": ["SignIn|SignUp|UserButton|useAuth|useUser|useClerk"],
+      "confidence": "high"
+    },
+    {
+      "name": "next-auth",
+      "import": "import { getServerSession } from 'next-auth'",
+      "patterns": ["next-auth|NextAuth"],
+      "anyOf": ["getServerSession|useSession|SessionProvider|signIn|signOut"],
+      "confidence": "high"
+    },
+    {
+      "name": "valibot",
+      "import": "import * as v from 'valibot'",
+      "patterns": ["ValiError|BaseSchema|safeParse"],
+      "anyOf": ["string|number|object|array|pipe|transform"],
+      "noneOf": ["ZodError|ZodType"],
+      "confidence": "high"
+    },
+    {
+      "name": "yup",
+      "import": "import * as yup from 'yup'",
+      "patterns": ["ValidationError|yup\\.string|yup\\.number|yup\\.object"],
+      "anyOf": ["isValid|validate|cast|shape"],
+      "noneOf": ["ZodError|ValiError"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-pdf",
+      "import": "import { Document, Page } from 'react-pdf'",
+      "patterns": ["react-pdf"],
+      "anyOf": ["onLoadSuccess|onLoadError|pageNumber|numPages|pdfjs"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-toastify",
+      "import": "import { toast, ToastContainer } from 'react-toastify'",
+      "patterns": ["Toastify|react-toastify"],
+      "anyOf": ["ToastContainer|toast\\.success|toast\\.error|toast\\.info|toast\\.warning"],
+      "noneOf": ["data-sonner|react-hot-toast"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-spring",
+      "import": "import { useSpring, animated } from 'react-spring'",
+      "patterns": ["react-spring"],
+      "anyOf": ["useSpring|useTrail|useTransition|useSprings|animated"],
+      "confidence": "high"
+    },
+    {
+      "name": "auto-animate",
+      "import": "import { useAutoAnimate } from '@formkit/auto-animate/react'",
+      "patterns": ["autoAnimate|useAutoAnimate"],
+      "anyOf": ["getTransitionSizes|autoAnimatePlugin"],
+      "confidence": "high"
+    },
+    {
+      "name": "sharp",
+      "import": "import sharp from 'sharp'",
+      "patterns": ["sharp"],
+      "anyOf": ["resize|toBuffer|toFile|metadata|jpeg|png|webp|avif"],
+      "noneOf": ["react|useState"],
+      "confidence": "medium"
+    },
+    {
+      "name": "jotai/utils",
+      "import": "import { atomWithStorage } from 'jotai/utils'",
+      "patterns": ["atomWithStorage|atomWithDefault|atomFamily|splitAtom|selectAtom|loadable|atomWithObservable"],
+      "confidence": "high"
+    },
+    {
+      "name": "jotai/vanilla",
+      "import": "import { atom, createStore } from 'jotai/vanilla'",
+      "patterns": ["atom not writable|no atom init"],
+      "anyOf": ["createStore"],
+      "noneOf": ["useAtom|useAtomValue|useSetAtom"],
       "confidence": "high"
     },
     {
