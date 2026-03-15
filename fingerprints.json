@@ -1420,6 +1420,297 @@
       "confidence": "high"
     },
     {
+      "name": "valtio/vanilla",
+      "import": "import { proxy, snapshot, subscribe } from 'valtio/vanilla'",
+      "patterns": ["proxy-compare|markToTrack|getUntracked"],
+      "anyOf": ["Object\\.preventExtensions", "getVersion"],
+      "noneOf": ["useSyncExternalStore|useRef|useState"],
+      "confidence": "high"
+    },
+    {
+      "name": "valtio/utils",
+      "import": "import { proxyMap, proxySet, subscribeKey, devtools } from 'valtio/utils'",
+      "patterns": ["proxyMap|proxySet|subscribeKey"],
+      "anyOf": ["Cannot perform mutations on a snapshot|deepClone|unstable_deepProxy"],
+      "confidence": "high"
+    },
+    {
+      "name": "@emotion/react",
+      "import": "import { css, jsx, ThemeProvider } from '@emotion/react'",
+      "patterns": ["data-emotion"],
+      "anyOf": ["CacheProvider|ThemeContext|withEmotionCache|ClassNames|Global"],
+      "confidence": "high"
+    },
+    {
+      "name": "@emotion/css",
+      "import": "import { css, cx, keyframes } from '@emotion/css'",
+      "patterns": ["data-emotion"],
+      "anyOf": ["injectGlobal|getRegisteredStyles|flush"],
+      "noneOf": ["CacheProvider|ThemeContext|ThemeProvider"],
+      "confidence": "high"
+    },
+    {
+      "name": "@tanstack/react-query-devtools",
+      "import": "import { ReactQueryDevtools } from '@tanstack/react-query-devtools'",
+      "patterns": ["ReactQueryDevtools|ReactQueryDevtoolsPanel"],
+      "confidence": "high"
+    },
+    {
+      "name": "@dnd-kit/utilities",
+      "import": "import { CSS } from '@dnd-kit/utilities'",
+      "patterns": ["useCombinedRefs|useIsomorphicLayoutEffect"],
+      "anyOf": ["canUseDOM|findFirstFocusableNode|getEventCoordinates"],
+      "noneOf": ["DndContext|useDraggable|useDroppable"],
+      "confidence": "high"
+    },
+    {
+      "name": "@floating-ui/dom",
+      "import": "import { computePosition, autoUpdate } from '@floating-ui/dom'",
+      "patterns": ["computePosition|autoUpdate"],
+      "anyOf": ["getOverflowAncestors|autoPlacement|detectOverflow"],
+      "noneOf": ["data-floating-ui-|useFloating"],
+      "confidence": "high"
+    },
+    {
+      "name": "@floating-ui/react-dom",
+      "import": "import { useFloating } from '@floating-ui/react-dom'",
+      "patterns": ["useFloating", "computePosition"],
+      "noneOf": ["data-floating-ui-inert|data-floating-ui-safe-polygon"],
+      "confidence": "high"
+    },
+    {
+      "name": "@mui/icons-material",
+      "import": "import { Home, Search } from '@mui/icons-material'",
+      "patterns": ["muiName|MuiSvgIcon"],
+      "anyOf": ["createSvgIcon"],
+      "confidence": "high"
+    },
+    {
+      "name": "@mui/lab",
+      "import": "import { LoadingButton, TabContext } from '@mui/lab'",
+      "patterns": ["--variant-textColor|--variant-outlinedColor|--variant-containedColor"],
+      "anyOf": ["LoadingButton|TabContext|Masonry|Timeline"],
+      "confidence": "high"
+    },
+    {
+      "name": "@mui/x-date-pickers",
+      "import": "import { DatePicker } from '@mui/x-date-pickers'",
+      "patterns": ["MuiLocalizationProvider|data-sectionindex"],
+      "anyOf": ["DateCalendar|DateField|DatePicker|DateTimePicker|DayCalendarSkeleton"],
+      "confidence": "high"
+    },
+    {
+      "name": "@mantine/hooks",
+      "import": "import { useDisclosure, useClipboard } from '@mantine/hooks'",
+      "patterns": ["useClipboard.*navigator\\.clipboard|use-local-storage.*localStorage"],
+      "anyOf": ["useClickOutside|useColorScheme|useCounter|useDebouncedCallback|useHotkeys"],
+      "confidence": "high"
+    },
+    {
+      "name": "@mantine/form",
+      "import": "import { useForm } from '@mantine/form'",
+      "patterns": ["@mantine/use-form|useFormContext was called outside of FormProvider|formRootRule"],
+      "anyOf": ["FORM_INDEX|createFormActions|createFormContext"],
+      "confidence": "high"
+    },
+    {
+      "name": "@mantine/notifications",
+      "import": "import { notifications, Notifications } from '@mantine/notifications'",
+      "patterns": ["--notifications-z-index|--notifications-container-width"],
+      "anyOf": ["@mantine/notifications|cleanNotifications|showNotification|updateNotification"],
+      "confidence": "high"
+    },
+    {
+      "name": "@chakra-ui/icons",
+      "import": "import { AddIcon, CheckIcon } from '@chakra-ui/icons'",
+      "patterns": ["chakra-ui|ChakraProvider"],
+      "anyOf": ["AddIcon|CheckIcon|ChevronDownIcon|CloseIcon|SearchIcon"],
+      "confidence": "high"
+    },
+    {
+      "name": "firebase/auth",
+      "import": "import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'",
+      "patterns": ["FirebaseError"],
+      "anyOf": ["EmailAuthProvider|GoogleAuthProvider|FacebookAuthProvider|PhoneAuthProvider|RecaptchaVerifier|signInWithEmailAndPassword"],
+      "noneOf": ["Firestore|getStorage|httpsCallable"],
+      "confidence": "high"
+    },
+    {
+      "name": "firebase/firestore",
+      "import": "import { getFirestore, collection, doc } from 'firebase/firestore'",
+      "patterns": ["FirebaseError", "Firestore"],
+      "anyOf": ["CollectionReference|DocumentReference|FirestoreError|IndexedDbTransactionError"],
+      "confidence": "high"
+    },
+    {
+      "name": "firebase/storage",
+      "import": "import { getStorage, ref, uploadBytes } from 'firebase/storage'",
+      "patterns": ["FirebaseError"],
+      "anyOf": ["StorageError|StorageErrorCode|getDownloadURL|uploadBytesResumable|getStorage"],
+      "noneOf": ["Firestore|EmailAuthProvider|httpsCallable"],
+      "confidence": "high"
+    },
+    {
+      "name": "firebase/functions",
+      "import": "import { getFunctions, httpsCallable } from 'firebase/functions'",
+      "patterns": ["FirebaseError"],
+      "anyOf": ["httpsCallable|httpsCallableFromURL|connectFunctionsEmulator|FunctionsError"],
+      "noneOf": ["Firestore|EmailAuthProvider|getStorage"],
+      "confidence": "high"
+    },
+    {
+      "name": "@supabase/ssr",
+      "import": "import { createBrowserClient, createServerClient } from '@supabase/ssr'",
+      "patterns": ["@supabase/ssr|createBrowserClient|createServerClient"],
+      "anyOf": ["MAX_CHUNK_SIZE|combineChunks|createChunks|deleteChunks"],
+      "confidence": "high"
+    },
+    {
+      "name": "gsap/ScrollTrigger",
+      "import": "import { ScrollTrigger } from 'gsap/ScrollTrigger'",
+      "patterns": ["Please gsap\\.registerPlugin\\(ScrollTrigger\\)|ScrollTrigger"],
+      "anyOf": ["gsap\\.com|GSAP|GreenSock"],
+      "confidence": "high"
+    },
+    {
+      "name": "gsap/Flip",
+      "import": "import { Flip } from 'gsap/Flip'",
+      "patterns": ["data-flip-id"],
+      "anyOf": ["Not a valid state object"],
+      "confidence": "high"
+    },
+    {
+      "name": "gsap/Draggable",
+      "import": "import { Draggable } from 'gsap/Draggable'",
+      "patterns": ["data-clickable"],
+      "anyOf": ["Please gsap\\.registerPlugin\\(Draggable\\)"],
+      "confidence": "high"
+    },
+    {
+      "name": "motion/react",
+      "import": "import { motion, AnimatePresence } from 'motion/react'",
+      "patterns": ["data-motion-pop-id"],
+      "anyOf": ["data-framer-portal-id|data-layout-id"],
+      "confidence": "high"
+    },
+    {
+      "name": "motion/dom",
+      "import": "import { animate, scroll } from 'motion/dom'",
+      "patterns": ["data-motion-pop-id|optimizedAppearDataAttribute"],
+      "noneOf": ["AnimatePresence|useMotionValue|useTransform"],
+      "confidence": "medium"
+    },
+    {
+      "name": "@react-spring/three",
+      "import": "import { a, animated } from '@react-spring/three'",
+      "patterns": ["react-spring:|R3F:"],
+      "anyOf": ["__r3f|isObject3D|Canvas"],
+      "confidence": "high"
+    },
+    {
+      "name": "lenis/react",
+      "import": "import { ReactLenis, useLenis } from 'lenis/react'",
+      "patterns": ["data-lenis-prevent"],
+      "anyOf": ["LenisContext|ReactLenis|useLenis"],
+      "confidence": "high"
+    },
+    {
+      "name": "@xstate/react",
+      "import": "import { useMachine, useActor } from '@xstate/react'",
+      "patterns": ["ActorProvider"],
+      "anyOf": ["createActorContext|useActor|useActorRef|useMachine|useSelector"],
+      "noneOf": ["DndContext|DndProvider"],
+      "confidence": "high"
+    },
+    {
+      "name": "@clerk/themes",
+      "import": "import { dark } from '@clerk/themes'",
+      "patterns": ["--cl-chassis-bottom|--cl-chassis-back|--cl-chassis-screen|--cl-screen"],
+      "anyOf": ["__type.*prebuilt_appearance|experimental_createTheme"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-aria-components",
+      "import": "import { Button, DatePicker, Dialog } from 'react-aria-components'",
+      "patterns": ["data-rac"],
+      "anyOf": ["data-focused|data-hovered|data-pressed|data-focus-visible"],
+      "confidence": "high"
+    },
+    {
+      "name": "@react-aria/focus",
+      "import": "import { FocusScope, useFocusRing } from '@react-aria/focus'",
+      "patterns": ["data-focus-scope-start|data-focus-scope-end"],
+      "anyOf": ["useFocusRing|useFocusManager|FocusScope|CLEAR_FOCUS_EVENT"],
+      "noneOf": ["data-focus-lock|data-focus-guard"],
+      "confidence": "high"
+    },
+    {
+      "name": "@react-aria/interactions",
+      "import": "import { useHover, usePress, useFocus } from '@react-aria/interactions'",
+      "patterns": ["PressResponderContext|data-react-aria-pressable"],
+      "anyOf": ["useHover|usePress|useFocus|useFocusWithin|useInteractOutside"],
+      "confidence": "high"
+    },
+    {
+      "name": "i18next-browser-languagedetector",
+      "import": "import LanguageDetector from 'i18next-browser-languagedetector'",
+      "patterns": ["option domain is invalid|option path is invalid|option expires is invalid"],
+      "anyOf": ["maxAge should be a Number|option sameSite is invalid"],
+      "confidence": "high"
+    },
+    {
+      "name": "i18next-http-backend",
+      "import": "import HttpBackend from 'i18next-http-backend'",
+      "patterns": ["No fetch and no xhr implementation found"],
+      "anyOf": ["loading namespace"],
+      "confidence": "high"
+    },
+    {
+      "name": "swr/infinite",
+      "import": "import useSWRInfinite from 'swr/infinite'",
+      "patterns": ["unstable_serialize"],
+      "anyOf": ["Fallback data is required when using Suspense in SSR"],
+      "noneOf": ["missing fetcher|missing key"],
+      "confidence": "high"
+    },
+    {
+      "name": "swr/mutation",
+      "import": "import useSWRMutation from 'swr/mutation'",
+      "patterns": ["missing fetcher|missing key"],
+      "anyOf": ["trigger the mutation"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-router",
+      "import": "import { RouterProvider, createBrowserRouter } from 'react-router'",
+      "patterns": ["FrameworkContext|data-discover|data-react-router-critical-css"],
+      "anyOf": ["RouterProvider|IDLE_NAVIGATION|IDLE_FETCHER|IDLE_BLOCKER"],
+      "confidence": "high"
+    },
+    {
+      "name": "next-safe-action",
+      "import": "import { createSafeActionClient } from 'next-safe-action'",
+      "patterns": ["ActionMetadataError|ActionOutputDataError|DEFAULT_SERVER_ERROR_MESSAGE"],
+      "anyOf": ["createSafeActionClient|returnValidationErrors|flattenValidationErrors"],
+      "confidence": "high"
+    },
+    {
+      "name": "@trpc/server",
+      "import": "import { initTRPC } from '@trpc/server'",
+      "patterns": ["TRPCError|initTRPC"],
+      "anyOf": ["callTRPCProcedure|getErrorShape|getTRPCErrorFromUnknown|transformTRPCResponse"],
+      "noneOf": ["createTRPCReact|createTRPCClient"],
+      "confidence": "high"
+    },
+    {
+      "name": "@hookform/devtools",
+      "import": "import { DevTool } from '@hookform/devtools'",
+      "patterns": ["DevTool"],
+      "anyOf": ["StateMachineProvider|createStore|useStateMachine"],
+      "noneOf": ["zodResolver|yupResolver"],
+      "confidence": "high"
+    },
+    {
       "name": "scheduler",
       "import": "// internal scheduler — do not import directly",
       "patterns": ["unstable_scheduleCallback|unstable_NormalPriority"],

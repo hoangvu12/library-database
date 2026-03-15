@@ -58,6 +58,22 @@ const LIBS_TO_TEST = [
   'react-wrap-balancer', 'react-medium-image-zoom',
   '@radix-ui/react-toolbar', 'react-image-gallery',
   '@clerk/clerk-react', 'react-scroll', 'react-countup',
+  // Subpackages batch
+  'valtio/vanilla', 'valtio/utils',
+  '@emotion/react', '@emotion/css',
+  '@tanstack/react-query-devtools',
+  '@dnd-kit/utilities', '@floating-ui/dom', '@floating-ui/react-dom',
+  '@mui/lab', '@mui/x-date-pickers',
+  '@mantine/hooks', '@mantine/form', '@mantine/notifications',
+  'firebase/auth', 'firebase/firestore', 'firebase/storage', 'firebase/functions',
+  '@supabase/ssr',
+  'gsap/ScrollTrigger', 'gsap/Flip', 'gsap/Draggable',
+  'motion/react', 'lenis/react',
+  '@xstate/react', '@clerk/themes',
+  'react-aria-components', '@react-aria/focus', '@react-aria/interactions',
+  'i18next-browser-languagedetector', 'i18next-http-backend',
+  'swr/infinite', 'swr/mutation',
+  'react-router', 'next-safe-action', '@trpc/server',
 ];
 
 function testFingerprint(fp, code) {
