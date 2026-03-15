@@ -1125,7 +1125,7 @@
     {
       "name": "jotai/utils",
       "import": "import { atomWithStorage } from 'jotai/utils'",
-      "patterns": ["atomWithStorage|atomWithDefault|atomFamily|splitAtom|selectAtom|loadable|atomWithObservable"],
+      "patterns": ["atomWithStorage|atomWithDefault|atomFamily|splitAtom|selectAtom|atomWithObservable"],
       "confidence": "high"
     },
     {
