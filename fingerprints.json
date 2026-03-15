@@ -13,14 +13,14 @@
       "name": "react",
       "import": "import { useState, useEffect } from 'react'",
       "patterns": ["Symbol\\.for\\s*\\(\\s*[\"']react\\."],
-      "anyOf": ["__SECRET_INTERNALS|ReactCurrentDispatcher|ReactCurrentOwner|react\\.element"],
+      "anyOf": ["__SECRET_INTERNALS|__CLIENT_INTERNALS_DO_NOT_USE|ReactCurrentDispatcher|ReactCurrentOwner|ReactSharedInternals|isReactComponent"],
       "confidence": "high"
     },
     {
       "name": "react-dom",
       "import": "import { createRoot } from 'react-dom/client'",
-      "patterns": ["__reactFiber|__reactInternalInstance|__reactContainer"],
-      "anyOf": ["createRoot|hydrateRoot|createPortal|flushSync"],
+      "patterns": ["Symbol\\.for\\s*\\(\\s*[\"']react\\.portal"],
+      "anyOf": ["__reactFiber|__reactInternalInstance|__reactContainer|__DOM_INTERNALS_DO_NOT_USE|createPortal|flushSync"],
       "confidence": "high"
     },
     {
@@ -35,15 +35,15 @@
       "name": "zustand/shallow",
       "import": "import { shallow } from 'zustand/shallow'",
       "patterns": ["Object\\.is"],
-      "anyOf": ["Symbol\\.iterator", "Object\\.getPrototypeOf", "hasOwnProperty\\.call"],
-      "noneOf": ["getState|setState|subscribe|useQuery|useMutation|createElement|useSyncExternalStore"],
+      "anyOf": ["Symbol\\.iterator", "Object\\.getPrototypeOf"],
+      "noneOf": ["useQuery|useMutation|QueryClient|ActionTypes"],
       "confidence": "high"
     },
     {
       "name": "zustand",
       "import": "import { useStore } from 'zustand'",
       "patterns": ["useSyncExternalStore", "\\.subscribe", "\\.getState"],
-      "noneOf": ["setState|getInitialState.*setState|useQuery|useMutation"],
+      "noneOf": ["useQuery|useMutation|QueryClient"],
       "confidence": "high"
     },
     {
@@ -77,26 +77,16 @@
     {
       "name": "zustand/traditional",
       "import": "import { useStoreWithEqualityFn } from 'zustand/traditional'",
-      "patterns": ["useSyncExternalStore", "equalityFn"],
-      "anyOf": ["\\.getState", "\\.subscribe"],
-      "noneOf": ["fireImmediately|subscribeWithSelector"],
+      "patterns": ["useSyncExternalStoreWithSelector", "\\.getState", "\\.getInitialState"],
+      "noneOf": ["fireImmediately|subscribeWithSelector|__REDUX_DEVTOOLS_EXTENSION__"],
       "confidence": "high"
     },
     {
       "name": "zustand/middleware/immer",
       "import": "import { immer } from 'zustand/middleware/immer'",
-      "patterns": ["produce|isDraftable|DRAFT_STATE"],
-      "anyOf": ["getState", "setState"],
-      "noneOf": ["enableMapSet|enablePatches"],
+      "patterns": ["produce", "setState"],
+      "anyOf": ["immer-nothing|immer-draftable|immer-state"],
       "confidence": "high"
-    },
-    {
-      "name": "zustand/middleware",
-      "import": "import { combine } from 'zustand/middleware'",
-      "patterns": ["getState", "setState"],
-      "anyOf": ["Object\\.assign"],
-      "noneOf": ["__REDUX_DEVTOOLS_EXTENSION__|equalityFn|fireImmediately|rehydrate|hasHydrated"],
-      "confidence": "medium"
     },
     {
       "name": "jotai",
@@ -174,12 +164,6 @@
     {
       "name": "framer-motion",
       "import": "import { motion, AnimatePresence } from 'framer-motion'",
-      "patterns": ["MotionDiv", "MotionButton", "MotionCanvas", "MotionSvg"],
-      "confidence": "high"
-    },
-    {
-      "name": "framer-motion",
-      "import": "import { motion, AnimatePresence } from 'framer-motion'",
       "patterns": ["variantChildren"],
       "anyOf": ["animationState", "whileHover", "isPresent"],
       "confidence": "high"
@@ -201,8 +185,8 @@
     {
       "name": "gsap",
       "import": "import gsap from 'gsap'",
-      "patterns": ["gsap\\.to|gsap\\.from|gsap\\.fromTo|gsap\\.timeline|gsap\\.set"],
-      "anyOf": ["ScrollTrigger", "gsap\\.registerPlugin"],
+      "patterns": ["gsap\\.com|GSAP"],
+      "anyOf": ["autoSleep", "overwrite", "GreenSock", "gsap\\.registerPlugin|gsap\\.to|gsap\\.from"],
       "confidence": "high"
     },
     {
@@ -498,16 +482,15 @@
     {
       "name": "clsx",
       "import": "import { clsx } from 'clsx'",
-      "patterns": ["arguments\\.length"],
-      "anyOf": ["typeof\\s+\\w+\\s*===?\\s*[\"']string[\"']", "typeof\\s+\\w+\\s*===?\\s*[\"']object[\"']"],
-      "noneOf": ["conflictingClassGroups", "defaultVariants", "cmdk-", "data-", "--radix-", "useState|useRef|useHover"],
+      "patterns": ["[\"']string[\"']\\s*==", "[\"']object[\"']\\s*==", "Array\\.isArray"],
+      "noneOf": ["conflictingClassGroups", "defaultVariants", "cmdk-", "data-", "--radix-", "useState|useRef|useHover|getState|setState|subscribe|Symbol\\.for"],
       "confidence": "medium"
     },
     {
       "name": "styled-components",
       "import": "import styled from 'styled-components'",
-      "patterns": ["sc-component-id|__sc-|SC_ATTR|createGlobalStyle|ThemeProvider"],
-      "noneOf": ["@emotion"],
+      "patterns": ["sc-component-id|__sc-|SC_ATTR|createGlobalStyle|data-styled"],
+      "noneOf": ["__emotion_|emotion-cache"],
       "confidence": "high"
     },
     {
@@ -615,9 +598,8 @@
     {
       "name": "lucide-react",
       "import": "import { IconName } from 'lucide-react'",
-      "patterns": ["[\"']lucide[\"']"],
-      "anyOf": ["strokeLinecap", "strokeLinejoin", "currentColor"],
-      "noneOf": ["heroicons|feather"],
+      "patterns": ["lucide-react", "strokeLinecap"],
+      "anyOf": ["strokeLinejoin", "currentColor"],
       "confidence": "high"
     },
     {
@@ -788,15 +770,15 @@
     {
       "name": "motion",
       "import": "import { motion, AnimatePresence } from 'motion/react'",
-      "patterns": ["motionComponentSymbol"],
-      "anyOf": ["presenceContext", "latestValues", "visualState", "variantChildren"],
+      "patterns": ["presenceContext", "latestValues"],
+      "anyOf": ["renderState", "visualState", "variantChildren"],
       "confidence": "high"
     },
     {
       "name": "motion",
       "import": "import { motion, AnimatePresence } from 'motion/react'",
-      "patterns": ["data-motion-pop-id"],
-      "anyOf": ["motionComponentSymbol"],
+      "patterns": ["variantChildren"],
+      "anyOf": ["animationState", "whileHover", "isPresent"],
       "confidence": "high"
     },
     {
