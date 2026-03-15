@@ -1,0 +1,777 @@
+{
+  "version": 1,
+  "fingerprints": [
+    {
+      "name": "react/jsx-runtime",
+      "import": "import { jsx, jsxs } from 'react/jsx-runtime'",
+      "patterns": ["Symbol\\.for\\s*\\(\\s*[\"']react\\."],
+      "anyOf": ["jsxRuntimeModule|reactJsxRuntime|\\.jsx\\s*=|jsxs?\\s*="],
+      "noneOf": ["useState|useEffect|createRoot|createPortal"],
+      "confidence": "high"
+    },
+    {
+      "name": "react",
+      "import": "import { useState, useEffect } from 'react'",
+      "patterns": ["Symbol\\.for\\s*\\(\\s*[\"']react\\."],
+      "anyOf": ["__SECRET_INTERNALS|ReactCurrentDispatcher|ReactCurrentOwner|react\\.element"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-dom",
+      "import": "import { createRoot } from 'react-dom/client'",
+      "patterns": ["__reactFiber|__reactInternalInstance|__reactContainer"],
+      "anyOf": ["createRoot|hydrateRoot|createPortal|flushSync"],
+      "confidence": "high"
+    },
+    {
+      "name": "zustand",
+      "import": "import { create } from 'zustand'",
+      "patterns": ["getState", "setState"],
+      "anyOf": ["subscribe", "getInitialState", "useSyncExternalStore"],
+      "noneOf": ["useQuery|useMutation"],
+      "confidence": "high"
+    },
+    {
+      "name": "zustand/shallow",
+      "import": "import { shallow } from 'zustand/shallow'",
+      "patterns": ["Object\\.is"],
+      "anyOf": ["Symbol\\.iterator", "Object\\.getPrototypeOf", "hasOwnProperty\\.call"],
+      "noneOf": ["getState|setState|subscribe|useQuery|useMutation|createElement|useSyncExternalStore"],
+      "confidence": "high"
+    },
+    {
+      "name": "zustand",
+      "import": "import { useStore } from 'zustand'",
+      "patterns": ["useSyncExternalStore", "\\.subscribe", "\\.getState"],
+      "noneOf": ["setState|getInitialState.*setState|useQuery|useMutation"],
+      "confidence": "high"
+    },
+    {
+      "name": "zustand/middleware",
+      "import": "import { subscribeWithSelector } from 'zustand/middleware'",
+      "patterns": ["equalityFn", "fireImmediately"],
+      "anyOf": ["subscribe", "\\.getState"],
+      "confidence": "high"
+    },
+    {
+      "name": "zustand/middleware",
+      "import": "import { persist } from 'zustand/middleware'",
+      "patterns": ["zustand persist middleware|rehydrate|hasHydrated|onFinishHydration"],
+      "confidence": "high"
+    },
+    {
+      "name": "zustand/middleware",
+      "import": "import { devtools } from 'zustand/middleware'",
+      "patterns": ["__REDUX_DEVTOOLS_EXTENSION__"],
+      "anyOf": ["dispatchFromDevtools", "__setState"],
+      "confidence": "high"
+    },
+    {
+      "name": "jotai",
+      "import": "import { atom, useAtom } from 'jotai'",
+      "patterns": ["atom not writable|no atom init|multiple Jotai instances|pmndrs\\/jotai"],
+      "confidence": "high"
+    },
+    {
+      "name": "valtio",
+      "import": "import { proxy, useSnapshot } from 'valtio'",
+      "patterns": ["canProxy|snapCache|valtioRef"],
+      "anyOf": ["proxyStateMap", "snapshotMap"],
+      "confidence": "high"
+    },
+    {
+      "name": "@reduxjs/toolkit",
+      "import": "import { configureStore, createSlice } from '@reduxjs/toolkit'",
+      "patterns": ["ActionTypes|currentReducer|@@redux"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-redux",
+      "import": "import { useSelector, useDispatch } from 'react-redux'",
+      "patterns": ["ReactReduxContext"],
+      "anyOf": ["useSyncExternalStore", "@@redux"],
+      "noneOf": ["useQuery|useMutation"],
+      "confidence": "medium"
+    },
+    {
+      "name": "mobx-react-lite",
+      "import": "import { observer } from 'mobx-react-lite'",
+      "patterns": ["makeAutoObservable|makeObservable|runInAction"],
+      "anyOf": ["observableRequiresReaction", "computedRequiresReaction"],
+      "confidence": "high"
+    },
+    {
+      "name": "recoil",
+      "import": "import { atom, useRecoilState } from 'recoil'",
+      "patterns": ["RecoilRoot|useRecoilState|useRecoilValue"],
+      "confidence": "high"
+    },
+    {
+      "name": "xstate",
+      "import": "import { createMachine, assign } from 'xstate'",
+      "patterns": ["createMachine"],
+      "anyOf": ["xstate\\.init|xstate\\.stop|xstate\\.error|xstate\\.done"],
+      "confidence": "high"
+    },
+    {
+      "name": "immer",
+      "import": "import { produce } from 'immer'",
+      "patterns": ["enableMapSet|enablePatches|isDraftable|DRAFT_STATE"],
+      "confidence": "high"
+    },
+    {
+      "name": "framer-motion",
+      "import": "import { motion, AnimatePresence } from 'framer-motion'",
+      "patterns": ["data-motion-pop-id"],
+      "confidence": "high"
+    },
+    {
+      "name": "framer-motion",
+      "import": "import { motion, AnimatePresence } from 'framer-motion'",
+      "patterns": ["presenceContext", "latestValues"],
+      "anyOf": ["renderState", "visualState", "attachTimeline"],
+      "confidence": "high"
+    },
+    {
+      "name": "framer-motion",
+      "import": "import { motion, AnimatePresence } from 'framer-motion'",
+      "patterns": ["projectionUpdate"],
+      "anyOf": ["projectionDelta", "whileHover", "whileTap", "whileInView", "whileDrag"],
+      "confidence": "high"
+    },
+    {
+      "name": "framer-motion",
+      "import": "import { motion, AnimatePresence } from 'framer-motion'",
+      "patterns": ["MotionDiv", "MotionButton", "MotionCanvas", "MotionSvg"],
+      "confidence": "high"
+    },
+    {
+      "name": "framer-motion",
+      "import": "import { motion, AnimatePresence } from 'framer-motion'",
+      "patterns": ["variantChildren"],
+      "anyOf": ["animationState", "whileHover", "isPresent"],
+      "confidence": "high"
+    },
+    {
+      "name": "framer-motion",
+      "import": "import { motion, AnimatePresence } from 'framer-motion'",
+      "patterns": ["attachTimeline"],
+      "anyOf": ["iterationDuration", "\\.play\\b", "\\.pause\\b", "\\.cancel\\b"],
+      "noneOf": ["WebGLRenderer", "AudioContext"],
+      "confidence": "high"
+    },
+    {
+      "name": "framer-motion",
+      "import": "import { motion, AnimatePresence } from 'framer-motion'",
+      "patterns": ["framerAppearId"],
+      "confidence": "high"
+    },
+    {
+      "name": "gsap",
+      "import": "import gsap from 'gsap'",
+      "patterns": ["gsap\\.to|gsap\\.from|gsap\\.fromTo|gsap\\.timeline|gsap\\.set"],
+      "anyOf": ["ScrollTrigger", "gsap\\.registerPlugin"],
+      "confidence": "high"
+    },
+    {
+      "name": "@react-spring/web",
+      "import": "import { useSpring, animated } from '@react-spring/web'",
+      "patterns": ["react-spring:"],
+      "anyOf": ["Cannot animate a .* SpringValue", "Got NaN while animating", "gentle|wobbly|stiff|molasses"],
+      "noneOf": ["motionComponentSymbol"],
+      "confidence": "high"
+    },
+    {
+      "name": "lenis",
+      "import": "import Lenis from 'lenis'",
+      "patterns": ["data-lenis-prevent"],
+      "anyOf": ["lenis-stopped", "lenis-scrolling", "lenis-smooth", "lenisScrollEnd"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-slot",
+      "import": "import { Slot } from '@radix-ui/react-slot'",
+      "patterns": ["\\^on\\[A-Z\\]"],
+      "anyOf": ["SlotClone", "isSlottable"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-dialog",
+      "import": "import { Dialog, DialogContent, DialogTrigger } from '@radix-ui/react-dialog'",
+      "patterns": ["DialogTitleWarning|DialogDescriptionWarning"],
+      "anyOf": ["focusScope\\.autoFocusOnMount", "dismissableLayer\\.pointerDownOutside", "data-radix-focus-guard"],
+      "noneOf": ["AlertDialogAction|AlertDialogCancel"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-alert-dialog",
+      "import": "import { AlertDialog, AlertDialogContent, AlertDialogAction } from '@radix-ui/react-alert-dialog'",
+      "patterns": ["alertdialog"],
+      "anyOf": ["AlertDialogAction|AlertDialogCancel", "data-radix-focus-guard"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-popover",
+      "import": "import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover'",
+      "patterns": ["--radix-popover-content-transform-origin|--radix-popover-content-available"],
+      "anyOf": ["--radix-popover-trigger-width", "data-radix-popover-content-wrapper"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-tooltip",
+      "import": "import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from '@radix-ui/react-tooltip'",
+      "patterns": ["--radix-tooltip-content-transform-origin|--radix-tooltip-content-available"],
+      "anyOf": ["--radix-tooltip-trigger-width", "TooltipProvider"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-dropdown-menu",
+      "import": "import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'",
+      "patterns": ["--radix-dropdown-menu-content-transform-origin|--radix-dropdown-menu-content-available"],
+      "anyOf": ["--radix-dropdown-menu-trigger-width", "menu\\.itemSelect"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-context-menu",
+      "import": "import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from '@radix-ui/react-context-menu'",
+      "patterns": ["--radix-context-menu-content-transform-origin|--radix-context-menu-content-available"],
+      "anyOf": ["data-radix-context-menu-content-wrapper", "menu\\.itemSelect"],
+      "noneOf": ["--radix-dropdown-menu-content"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-menubar",
+      "import": "import { Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem } from '@radix-ui/react-menubar'",
+      "patterns": ["--radix-menubar-content-transform-origin|--radix-menubar-content-available"],
+      "anyOf": ["data-radix-menubar-content", "data-radix-menubar-subtrigger"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-select",
+      "import": "import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@radix-ui/react-select'",
+      "patterns": ["SelectScrollUpButton|SelectScrollDownButton"],
+      "anyOf": ["data-placeholder", "data-radix-collection-item"],
+      "noneOf": ["--radix-dropdown-menu", "--radix-context-menu"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-tabs",
+      "import": "import { Tabs, TabsList, TabsTrigger, TabsContent } from '@radix-ui/react-tabs'",
+      "patterns": ["TabsList", "TabsTrigger", "TabsContent"],
+      "anyOf": ["data-radix-collection-item"],
+      "noneOf": ["--radix-popover", "--radix-tooltip", "--radix-dropdown"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-accordion",
+      "import": "import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@radix-ui/react-accordion'",
+      "patterns": ["--radix-accordion-content-height|--radix-accordion-content-width"],
+      "anyOf": ["--radix-collapsible-content-height", "AccordionTrigger"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-collapsible",
+      "import": "import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@radix-ui/react-collapsible'",
+      "patterns": ["--radix-collapsible-content-height|--radix-collapsible-content-width"],
+      "noneOf": ["--radix-accordion-content-height"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-checkbox",
+      "import": "import { Checkbox, CheckboxIndicator } from '@radix-ui/react-checkbox'",
+      "patterns": ["CheckboxBubbleInput|CheckboxIndicator"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-switch",
+      "import": "import { Switch } from '@radix-ui/react-switch'",
+      "patterns": ["SwitchThumb", "SwitchBubbleInput"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-scroll-area",
+      "import": "import { ScrollArea, ScrollBar } from '@radix-ui/react-scroll-area'",
+      "patterns": ["data-radix-scroll-area-viewport|--radix-scroll-area-corner-width|--radix-scroll-area-thumb"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-slider",
+      "import": "import { Slider } from '@radix-ui/react-slider'",
+      "patterns": ["--radix-slider-thumb-transform"],
+      "anyOf": ["SliderTrack", "SliderRange", "SliderThumb"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-toggle",
+      "import": "import { Toggle } from '@radix-ui/react-toggle'",
+      "patterns": ["Toggle"],
+      "noneOf": ["ToggleGroup", "--radix-", "data-radix-"],
+      "confidence": "medium"
+    },
+    {
+      "name": "@radix-ui/react-toggle-group",
+      "import": "import { ToggleGroup, ToggleGroupItem } from '@radix-ui/react-toggle-group'",
+      "patterns": ["ToggleGroup", "ToggleGroupItem"],
+      "anyOf": ["Missing prop .* type .* expected on .* ToggleGroup"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-radio-group",
+      "import": "import { RadioGroup, RadioGroupItem } from '@radix-ui/react-radio-group'",
+      "patterns": ["RadioGroupItem", "RadioGroupIndicator"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-avatar",
+      "import": "import { Avatar, AvatarImage, AvatarFallback } from '@radix-ui/react-avatar'",
+      "patterns": ["AvatarImage", "AvatarFallback"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-progress",
+      "import": "import { Progress, ProgressIndicator } from '@radix-ui/react-progress'",
+      "patterns": ["ProgressIndicator"],
+      "anyOf": ["progressbar"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-separator",
+      "import": "import { Separator } from '@radix-ui/react-separator'",
+      "patterns": ["Separator"],
+      "anyOf": ["data-orientation"],
+      "noneOf": ["--radix-popover", "--radix-tooltip", "--radix-dropdown", "--radix-menubar", "cmdk-"],
+      "confidence": "medium"
+    },
+    {
+      "name": "@radix-ui/react-aspect-ratio",
+      "import": "import { AspectRatio } from '@radix-ui/react-aspect-ratio'",
+      "patterns": ["data-radix-aspect-ratio-wrapper"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-label",
+      "import": "import { Label } from '@radix-ui/react-label'",
+      "patterns": ["Label"],
+      "anyOf": ["onMouseDown"],
+      "noneOf": ["--radix-popover", "--radix-tooltip", "cmdk-", "DropdownMenu", "SelectLabel"],
+      "confidence": "medium"
+    },
+    {
+      "name": "@radix-ui/react-navigation-menu",
+      "import": "import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink } from '@radix-ui/react-navigation-menu'",
+      "patterns": ["--radix-navigation-menu-viewport-width|--radix-navigation-menu-viewport-height"],
+      "anyOf": ["navigationMenu\\.rootContentDismiss", "navigationMenu\\.linkSelect"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-hover-card",
+      "import": "import { HoverCard, HoverCardContent, HoverCardTrigger } from '@radix-ui/react-hover-card'",
+      "patterns": ["--radix-hover-card-content-transform-origin|--radix-hover-card-content-available"],
+      "anyOf": ["--radix-hover-card-trigger-width"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-aria",
+      "import": "import { useHover, usePress } from 'react-aria'",
+      "patterns": ["addGlobalListener|removeAllGlobalListeners"],
+      "anyOf": ["hoverProps", "pressProps", "onHoverStart", "onPressStart", "focusRingProps"],
+      "confidence": "high"
+    },
+    {
+      "name": "@headlessui/react",
+      "import": "import { Menu, Dialog, Transition } from '@headlessui/react'",
+      "patterns": ["Listbox|Combobox|Disclosure"],
+      "anyOf": ["headlessui"],
+      "confidence": "high"
+    },
+    {
+      "name": "cmdk",
+      "import": "import { Command } from 'cmdk'",
+      "patterns": ["cmdk-root|cmdk-item|cmdk-list|cmdk-input"],
+      "anyOf": ["cmdk-group", "--cmdk-list-height", "cmdk-item-select"],
+      "confidence": "high"
+    },
+    {
+      "name": "vaul",
+      "import": "import { Drawer } from 'vaul'",
+      "patterns": ["data-vaul-drawer|data-vaul-overlay"],
+      "anyOf": ["data-vaul-snap-points", "vaul-dragging", "data-vaul-no-drag", "useDrawerContext"],
+      "confidence": "high"
+    },
+    {
+      "name": "input-otp",
+      "import": "import { OTPInput } from 'input-otp'",
+      "patterns": ["data-input-otp"],
+      "anyOf": ["one-time-code", "input-otp-style", "data-lastpass-icon-root"],
+      "confidence": "high"
+    },
+    {
+      "name": "@floating-ui/react",
+      "import": "import { useFloating } from '@floating-ui/react'",
+      "patterns": ["data-floating-ui-"],
+      "anyOf": ["data-floating-ui-inert", "data-floating-ui-safe-polygon", "data-floating-ui-focus-guard"],
+      "noneOf": ["--radix-popover", "--radix-tooltip"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-select",
+      "import": "import Select from 'react-select'",
+      "patterns": ["--is-disabled|--is-focused|--is-selected"],
+      "anyOf": ["MenuList|MenuPortal|ClearIndicator|DropdownIndicator|IndicatorsContainer"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-day-picker",
+      "import": "import { DayPicker } from 'react-day-picker'",
+      "patterns": ["rdp-root|rdp-day|rdp-month"],
+      "anyOf": ["rdp-chevron", "rdp-caption_label", "rdp-range_start", "useDayPicker"],
+      "confidence": "high"
+    },
+    {
+      "name": "embla-carousel-react",
+      "import": "import useEmblaCarousel from 'embla-carousel-react'",
+      "patterns": ["slideFocusStart|slidesChanged|slidesInView"],
+      "anyOf": ["reInit"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-resizable-panels",
+      "import": "import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels'",
+      "patterns": ["data-panel-group|data-panel-resize-handle|data-resize-handle"],
+      "anyOf": ["react-resizable-panels:", "Panel components must be rendered within a PanelGroup"],
+      "confidence": "high"
+    },
+    {
+      "name": "swiper",
+      "import": "import { Swiper, SwiperSlide } from 'swiper/react'",
+      "patterns": ["swiper-slide|swiper-wrapper"],
+      "anyOf": ["swiper-slide-active", "swiper-no-swiping", "data-swiper-slide-index"],
+      "confidence": "high"
+    },
+    {
+      "name": "tailwind-merge",
+      "import": "import { twMerge } from 'tailwind-merge'",
+      "patterns": ["conflictingClassGroups"],
+      "anyOf": ["conflictingClassGroupModifiers", "orderSensitiveModifiers", "maybePostfixModifierPosition", "hasImportantModifier"],
+      "confidence": "high"
+    },
+    {
+      "name": "class-variance-authority",
+      "import": "import { cva } from 'class-variance-authority'",
+      "patterns": ["defaultVariants"],
+      "anyOf": ["compoundVariants"],
+      "noneOf": ["conflictingClassGroups"],
+      "confidence": "medium"
+    },
+    {
+      "name": "clsx",
+      "import": "import { clsx } from 'clsx'",
+      "patterns": ["arguments\\.length"],
+      "anyOf": ["typeof\\s+\\w+\\s*===?\\s*[\"']string[\"']", "typeof\\s+\\w+\\s*===?\\s*[\"']object[\"']"],
+      "noneOf": ["conflictingClassGroups", "defaultVariants", "cmdk-", "data-", "--radix-", "useState|useRef|useHover"],
+      "confidence": "medium"
+    },
+    {
+      "name": "styled-components",
+      "import": "import styled from 'styled-components'",
+      "patterns": ["sc-component-id|__sc-|SC_ATTR|createGlobalStyle|ThemeProvider"],
+      "noneOf": ["@emotion"],
+      "confidence": "high"
+    },
+    {
+      "name": "@emotion/styled",
+      "import": "import styled from '@emotion/styled'",
+      "patterns": ["__emotion_|emotion-cache"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-hook-form",
+      "import": "import { useForm } from 'react-hook-form'",
+      "patterns": ["formState", "handleSubmit"],
+      "anyOf": ["useController|useWatch|useFieldArray|useFormContext|FormProvider|register|unregister|setError|clearErrors"],
+      "noneOf": ["useFormik|Formik"],
+      "confidence": "high"
+    },
+    {
+      "name": "formik",
+      "import": "import { Formik, Form, Field } from 'formik'",
+      "patterns": ["useFormik|Formik"],
+      "anyOf": ["useFormikContext|ErrorMessage|FieldArray|validateOnChange|validateOnBlur"],
+      "confidence": "high"
+    },
+    {
+      "name": "zod",
+      "import": "import { z } from 'zod'",
+      "patterns": ["ZodError|ZodType|ZodString|ZodNumber"],
+      "anyOf": ["\\.safeParse|\\.parse|zodErrorMap"],
+      "confidence": "high"
+    },
+    {
+      "name": "@tanstack/react-query",
+      "import": "import { useQuery, useMutation } from '@tanstack/react-query'",
+      "patterns": ["queryKey|queryFn|QueryClient"],
+      "anyOf": ["useInfiniteQuery|QueryClientProvider|useQueryClient|queryCache|mutationCache"],
+      "noneOf": ["useSelector|useDispatch"],
+      "confidence": "high"
+    },
+    {
+      "name": "swr",
+      "import": "import useSWR from 'swr'",
+      "patterns": ["SWRConfig|revalidateOnFocus|revalidateOnReconnect"],
+      "confidence": "high"
+    },
+    {
+      "name": "@apollo/client",
+      "import": "import { useQuery, useMutation } from '@apollo/client'",
+      "patterns": ["ApolloClient|InMemoryCache|ApolloProvider"],
+      "anyOf": ["useApolloClient|gql|ApolloLink"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-router-dom",
+      "import": "import { BrowserRouter, Routes, Route } from 'react-router-dom'",
+      "patterns": ["BrowserRouter|createBrowserRouter|RouterProvider"],
+      "anyOf": ["useNavigate|useParams|useLocation|useSearchParams"],
+      "confidence": "high"
+    },
+    {
+      "name": "@dnd-kit/core",
+      "import": "import { DndContext, DragOverlay } from '@dnd-kit/core'",
+      "patterns": ["DndContext"],
+      "anyOf": ["useDraggable|useDroppable|DragOverlay|closestCenter"],
+      "confidence": "high"
+    },
+    {
+      "name": "@dnd-kit/sortable",
+      "import": "import { SortableContext, useSortable } from '@dnd-kit/sortable'",
+      "patterns": ["SortableContext|useSortable"],
+      "anyOf": ["arrayMove|verticalListSortingStrategy"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-beautiful-dnd",
+      "import": "import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'",
+      "patterns": ["DragDropContext", "Droppable", "Draggable"],
+      "confidence": "high"
+    },
+    {
+      "name": "@tanstack/react-virtual",
+      "import": "import { useVirtualizer } from '@tanstack/react-virtual'",
+      "patterns": ["useVirtualizer|useWindowVirtualizer"],
+      "anyOf": ["scrollToIndex|getTotalSize|getVirtualItems"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-virtuoso",
+      "import": "import { Virtuoso } from 'react-virtuoso'",
+      "patterns": ["Virtuoso|GroupedVirtuoso|TableVirtuoso"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-window",
+      "import": "import { FixedSizeList } from 'react-window'",
+      "patterns": ["FixedSizeList|VariableSizeList|FixedSizeGrid|VariableSizeGrid"],
+      "confidence": "high"
+    },
+    {
+      "name": "@tanstack/react-table",
+      "import": "import { useReactTable, getCoreRowModel } from '@tanstack/react-table'",
+      "patterns": ["columnVisibility", "rowSelection"],
+      "anyOf": ["debugTable", "debugColumns", "columnPinning", "enableColumnFilter", "enableSorting", "columnFilters"],
+      "confidence": "high"
+    },
+    {
+      "name": "lucide-react",
+      "import": "import { IconName } from 'lucide-react'",
+      "patterns": ["[\"']lucide[\"']"],
+      "anyOf": ["strokeLinecap", "strokeLinejoin", "currentColor"],
+      "noneOf": ["heroicons|feather"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-icons",
+      "import": "import { FaIconName } from 'react-icons/fa'",
+      "patterns": ["GenIcon"],
+      "confidence": "high"
+    },
+    {
+      "name": "@phosphor-icons/react",
+      "import": "import { IconName } from '@phosphor-icons/react'",
+      "patterns": ["phosphor-react|PhosphorLogo"],
+      "confidence": "high"
+    },
+    {
+      "name": "sonner",
+      "import": "import { toast, Toaster } from 'sonner'",
+      "patterns": ["data-sonner-toaster|data-sonner-toast"],
+      "anyOf": ["sonner-loading-wrapper", "sonner-spinner", "--sonner-fade-in"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-hot-toast",
+      "import": "import toast, { Toaster } from 'react-hot-toast'",
+      "patterns": ["useToaster|react-hot-toast"],
+      "noneOf": ["data-sonner"],
+      "confidence": "high"
+    },
+    {
+      "name": "date-fns",
+      "import": "import { format, parseISO } from 'date-fns'",
+      "patterns": ["formatDistance|differenceInDays|addDays|startOfDay|parseISO"],
+      "confidence": "medium"
+    },
+    {
+      "name": "dayjs",
+      "import": "import dayjs from 'dayjs'",
+      "patterns": ["dayjs"],
+      "anyOf": ["\\.format\\(", "\\$isDayjsObject"],
+      "confidence": "medium"
+    },
+    {
+      "name": "luxon",
+      "import": "import { DateTime } from 'luxon'",
+      "patterns": ["DateTime\\.now|DateTime\\.fromISO|DateTime\\.fromFormat"],
+      "confidence": "high"
+    },
+    {
+      "name": "@react-three/fiber",
+      "import": "import { Canvas } from '@react-three/fiber'",
+      "patterns": ["__r3f"],
+      "anyOf": ["R3F:", "isObject3D", "its-fine"],
+      "confidence": "high"
+    },
+    {
+      "name": "@react-three/drei",
+      "import": "import { OrbitControls, Html } from '@react-three/drei'",
+      "patterns": ["__r3f"],
+      "anyOf": ["OrbitControls|PerspectiveCamera|Html|Environment|useGLTF|useTexture"],
+      "confidence": "high"
+    },
+    {
+      "name": "three",
+      "import": "import * as THREE from 'three'",
+      "patterns": ["\\.isObject3D|\\.isMesh|\\.isMaterial|\\.isBufferGeometry"],
+      "anyOf": ["REVISION", "WebGLRenderer", "PerspectiveCamera", "BoxGeometry"],
+      "confidence": "high"
+    },
+    {
+      "name": "@splinetool/react-spline",
+      "import": "import Spline from '@splinetool/react-spline'",
+      "patterns": ["spline"],
+      "anyOf": ["SPEObject|spline-viewer"],
+      "confidence": "medium"
+    },
+    {
+      "name": "recharts",
+      "import": "import { LineChart, Line, XAxis, YAxis } from 'recharts'",
+      "patterns": ["recharts-"],
+      "anyOf": ["recharts-wrapper", "recharts-surface", "recharts-cartesian-axis", "recharts-tooltip"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-intersection-observer",
+      "import": "import { useInView } from 'react-intersection-observer'",
+      "patterns": ["IntersectionObserver", "useInView|inView"],
+      "anyOf": ["triggerOnce|initialInView|fallbackInView|trackVisibility"],
+      "noneOf": ["whileInView|motionComponentSymbol|WebGLRenderer|getContext\\s*\\(\\s*['\"]webgl"],
+      "confidence": "medium"
+    },
+    {
+      "name": "typed.js",
+      "import": "import Typed from 'typed.js'",
+      "patterns": ["typeSpeed|backSpeed|backDelay|startDelay|smartBackspace"],
+      "anyOf": ["showCursor|cursorChar|typed-cursor"],
+      "confidence": "high"
+    },
+    {
+      "name": "countup.js",
+      "import": "import { CountUp } from 'countup.js'",
+      "patterns": ["countUp|decimalPlaces|useGrouping|useEasing"],
+      "anyOf": ["enableScrollSpy|scrollSpyDelay"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-parallax-tilt",
+      "import": "import Tilt from 'react-parallax-tilt'",
+      "patterns": ["tiltMaxAngleX|tiltMaxAngleY|perspective|glareEnable"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-type-animation",
+      "import": "import { TypeAnimation } from 'react-type-animation'",
+      "patterns": ["TypeAnimation"],
+      "anyOf": ["typeSpeed|deletionSpeed|wrapper"],
+      "noneOf": ["typed-cursor|smartBackspace"],
+      "confidence": "medium"
+    },
+    {
+      "name": "react-player",
+      "import": "import ReactPlayer from 'react-player'",
+      "patterns": ["ReactPlayer|react-player"],
+      "anyOf": ["onReady|onPlay|onPause|onEnded|onProgress"],
+      "confidence": "high"
+    },
+    {
+      "name": "react-confetti",
+      "import": "import Confetti from 'react-confetti'",
+      "patterns": ["numberOfPieces|confettiSource|recycle|drawShape"],
+      "confidence": "high"
+    },
+    {
+      "name": "nuqs",
+      "import": "import { useQueryState } from 'nuqs'",
+      "patterns": ["\\[nuqs\\]"],
+      "anyOf": ["clearOnDefault", "throttleMs", "limitUrlUpdates"],
+      "confidence": "high"
+    },
+    {
+      "name": "next-themes",
+      "import": "import { useTheme, ThemeProvider } from 'next-themes'",
+      "patterns": ["ThemeProvider|useTheme"],
+      "anyOf": ["enableSystem|enableColorScheme|disableTransitionOnChange|defaultTheme|storageKey"],
+      "noneOf": ["--radix-", "data-sonner"],
+      "confidence": "medium"
+    },
+    {
+      "name": "usehooks-ts",
+      "import": "import { useLocalStorage } from 'usehooks-ts'",
+      "patterns": ["useLocalStorage|useMediaQuery|useDebounce|useEventListener"],
+      "noneOf": ["zustand|jotai|valtio|recharts"],
+      "confidence": "medium"
+    },
+    {
+      "name": "react-use",
+      "import": "import { useToggle } from 'react-use'",
+      "patterns": ["useToggle|useMount|useUpdateEffect|useDeepCompareEffect"],
+      "noneOf": ["zustand|jotai|valtio"],
+      "confidence": "medium"
+    },
+    {
+      "name": "react-textarea-autosize",
+      "import": "import TextareaAutosize from 'react-textarea-autosize'",
+      "patterns": ["TextareaAutosize|autosize"],
+      "anyOf": ["onHeightChange|cacheMeasurements"],
+      "confidence": "high"
+    },
+    {
+      "name": "scheduler",
+      "import": "// internal scheduler — do not import directly",
+      "patterns": ["unstable_scheduleCallback|unstable_NormalPriority"],
+      "confidence": "high"
+    },
+    {
+      "name": "@reduxjs/toolkit",
+      "import": "import { configureStore } from '@reduxjs/toolkit'",
+      "patterns": ["@@redux\\/INIT|@@redux\\/REPLACE"],
+      "confidence": "high"
+    },
+    {
+      "name": "@radix-ui/react-primitive",
+      "import": "// internal Radix primitive — import the specific Radix package instead",
+      "patterns": ["data-radix-focus-guard"],
+      "anyOf": ["dismissableLayer|focusScope"],
+      "noneOf": ["Dialog|Popover|DropdownMenu|Select|AlertDialog"],
+      "confidence": "high"
+    }
+  ]
+}
