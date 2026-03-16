@@ -481,9 +481,9 @@
     {
       "name": "clsx",
       "import": "import { clsx } from 'clsx'",
-      "patterns": ["[\"']string[\"']\\s*==", "[\"']object[\"']\\s*==", "Array\\.isArray"],
-      "noneOf": ["conflictingClassGroups", "defaultVariants", "cmdk-", "data-", "--radix-", "useState|useRef|useHover|getState|setState|subscribe|Symbol\\.for", "useEffect|useCallback|useMemo|createContext|forwardRef|React\\.", "querySelector|addEventListener|removeEventListener|fetch\\(|XMLHttpRequest", "axios|firebase|supabase|trpc|GraphQL"],
-      "confidence": "low"
+      "patterns": ["==\\s*[\"']string[\"']|[\"']string[\"']\\s*==", "==\\s*[\"']number[\"']|[\"']number[\"']\\s*==", "\\+=\" \""],
+      "noneOf": ["conflictingClassGroups", "defaultVariants", "cmdk-", "data-rac", "--radix-", "useState|useRef|useHover|getState|setState|subscribe|Symbol\\.for", "useEffect|useCallback|useMemo|createContext|forwardRef|React\\.", "querySelector|addEventListener|removeEventListener|fetch\\(|XMLHttpRequest", "axios|firebase|supabase|trpc|GraphQL"],
+      "confidence": "medium"
     },
     {
       "name": "styled-components",
